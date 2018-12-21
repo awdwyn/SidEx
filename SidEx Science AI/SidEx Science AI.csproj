@@ -60,6 +60,7 @@
     <None Include="Patches\AddToModuleCommand.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Patches\DMagicCompatibility.cfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SidEx Common\SidEx Common.csproj">
