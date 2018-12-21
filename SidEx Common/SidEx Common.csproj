@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0A5C89A5-562B-457E-B4DE-714FC2D0C4A3}</ProjectGuid>
+    <ProjectGuid>{DAEF82E1-88FC-4D53-BCEB-F015F9497273}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SidEx.ProjectManager</RootNamespace>
-    <AssemblyName>SidExProjectManager</AssemblyName>
+    <RootNamespace>SidEx</RootNamespace>
+    <AssemblyName>SidExCommon</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -55,18 +55,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SidExProjectManager.cs" />
+    <Compile Include="KerbalismAPI.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="ModuleScienceExperimentExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SidExProjectManagerScenario.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SidEx Common\SidEx Common.csproj">
-      <Project>{daef82e1-88fc-4d53-bceb-f015f9497273}</Project>
-      <Name>SidEx Common</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>start /D "$(SolutionDir)" /WAIT postbuild.bat "$(SolutionDir)" "$(TargetDir)" "$(TargetFileName)" "$(Configuration)" "$(ProjectName)"</PostBuildEvent>
   </PropertyGroup>
