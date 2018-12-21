@@ -1,4 +1,7 @@
 # SidEx
+
+Note: These mods use some assets from other mods. They are for personal use and are hosted on github solely for version control and redundancy/backup against data loss. Once these mods are modified to use bespoke/open assets this note will be removed.
+
 SidEx Kerbal Space Program Mods
 
 A small collection of my personal mods for Kerbal Space Program. 
