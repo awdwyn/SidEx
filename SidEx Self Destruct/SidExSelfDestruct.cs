@@ -8,7 +8,6 @@ namespace SidEx.SelfDestruct {
 
 	[KSPModule("SidEx Self Destruct")]
     public class SidExSelfDestruct : PartModule {
-		public const string DEBUGNAME = @"[SidEx Self Destruct]";
 
 		[KSPField(isPersistant = true, guiActive = true, guiActiveEditor = true, guiName = "Time Delay"), UI_FloatRange(minValue = 1.0f, maxValue = 60.0f, stepIncrement = 1.0f, scene = UI_Scene.All)]
 		public float timeDelay = 10.0f;
@@ -35,7 +34,7 @@ namespace SidEx.SelfDestruct {
 		}
 
 		public override void OnStart(StartState state) {
-			Debug.LogFormat(@"{0} OnStart", DEBUGNAME);
+			Log.Write($"OnStart");
 			part.stackIcon.SetIconColor(XKCDColors.FireEngineRed);
 			part.ActivatesEvenIfDisconnected = true;
 
@@ -61,9 +60,9 @@ namespace SidEx.SelfDestruct {
 		}
 
 		public override void OnActive() {
-			Debug.LogFormat(@"{0} Activating!", DEBUGNAME);
+			Log.Write($"Activating!");
 			if (canStage && countDownInitiated == 0.0f) {
-				Debug.LogFormat(@"{0} OnActive", DEBUGNAME);
+				Log.Write($"OnActive");
 				countDownInitiated = Time.time;
 				StartCoroutine(DoSelfDestruct());
 				staged = true;
@@ -159,7 +158,7 @@ namespace SidEx.SelfDestruct {
 		[KSPEvent(active = false, guiActive = true, guiActiveUnfocused = true, guiName = "Self Destruct!", unfocusedRange = 8.0f)]
 		public void ExplodeAllEvent() {
 			countDownInitiated = Time.time;
-			Debug.Log("Tac.ExplodeAllEvent");
+			Log.Write("ExplodeAllEvent");
 			StartCoroutine(DoSelfDestruct());
 			UpdateSelfDestructEvents();
 		}
@@ -225,16 +224,16 @@ namespace SidEx.SelfDestruct {
 		private IEnumerator<WaitForSeconds> DoSelfDestruct() {
 			ScreenMessage msg = null;
 			if (showCountdown) {
-				Debug.LogFormat(@"{0} DoSelfDestruct 1", DEBUGNAME); 
+				Log.Write($"DoSelfDestruct 1"); 
 				msg = ScreenMessages.PostScreenMessage("Self destruct sequence initiated.", 1.0f, ScreenMessageStyle.UPPER_CENTER);
-				Debug.LogFormat(@"{0} DoSelfDestruct", DEBUGNAME); 
+				Log.Write($"DoSelfDestruct"); 
 			}
 
 			while ((Time.time - countDownInitiated) < timeDelay && !abortCountdown) {
 				float remaining = timeDelay - (Time.time - countDownInitiated);
 				if (showCountdown) {
 					UpdateCountdownMessage(ref msg, remaining);
-					Debug.LogFormat(@"{0} DoSelfDestruct 2", DEBUGNAME);
+					Log.Write($"DoSelfDestruct 2");
 					ScreenMessages.PostScreenMessage(msg.message, 1.0f, ScreenMessageStyle.UPPER_CENTER);
 				}
 				yield return new WaitForSeconds(1.0f);
@@ -256,15 +255,15 @@ namespace SidEx.SelfDestruct {
 						p.partInfo.name != "LaunchEscapeSystem"
 					);
 					if (part != null) {
-						Debug.LogFormat(@"{0} Blowing up {1}", DEBUGNAME, part.name);
+						Log.Write($"Blowing up {part.name}");
 						part.explode();
 						// Do a yield here in case something else (ie:  Bob's Panic Box) needs to react to the part exploding
 						yield return null;
 					} else {
 						// Explode the rest of the parts
-						Debug.LogFormat(@"{0} No more safe parts, doing the last ones...", DEBUGNAME);
+						Log.Write($"No more safe parts, doing the last ones...");
 						while (vessel.parts.Count > 0) { 
-							Debug.LogFormat(@"{0} Blowing up {1}", DEBUGNAME, vessel.parts[0].name);
+							Log.Write($"Blowing up {vessel.parts[0].name}");
 							vessel.parts[0].explode();
 							// Do a yield here in case something else (ie:  Bob's Panic Box) needs to react to the part exploding
 							yield return null;
@@ -288,7 +287,7 @@ namespace SidEx.SelfDestruct {
 		}
 
 		private void UpdateCountdownMessage(ref ScreenMessage msg, float remaining) {
-			Debug.LogFormat(@"{0} UpdatecountdownMessage, countdownActive: {1}", DEBUGNAME, countDownActive.ToString());
+			Log.Write($"UpdatecountdownMessage, countdownActive: {countDownActive.ToString()}");
 			// If the countdown message is currently being displayed
 			//if (countDownActive)
 			{
@@ -296,7 +295,7 @@ namespace SidEx.SelfDestruct {
 				if (showCountdown) {
 					// Update the countdown message
 					msg.message = "Self destruct sequence initiated: " + remaining.ToString("#0");
-					Debug.LogFormat(@"{0} Updating message 1", DEBUGNAME);
+					Log.Write($"Updating message 1");
 				} else {
 					// The UI must have been hidden or the user changed showCountdown?
 					msg.duration = 1.0f;

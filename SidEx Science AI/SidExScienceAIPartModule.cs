@@ -5,7 +5,6 @@ using KSP.UI.Screens;
 namespace SidEx.ScienceAI {
 	[KSPModule("SidEx Science AI")]
 	public class SidExScienceAIPartModule : PartModule {
-		public const string DEBUGNAME = @"[SidEx Science AI]";
 
 		[KSPField(isPersistant = true, guiActive = true, guiActiveEditor = true, guiName = "Science AI"), UI_Toggle(scene = UI_Scene.All, enabledText = "Enabled", disabledText = "Disabled")]
 		public bool enableScienceAIOnThisVessel = false;

@@ -8,10 +8,9 @@ using UnityEngine;
 namespace SidEx.ProjectManager {
 	[KSPAddon(KSPAddon.Startup.Flight, false)]
 	public class SidExProjectManager : MonoBehaviour {
-		public const string DEBUGNAME = @"[SidEx Project Manager]";
 
 		public void Start() {
-			Debug.LogFormat(@"{0} Starting up...", DEBUGNAME);
+			Log.Write($"Starting up...");
 
 			GameEvents.onVesselChange.Add(this.VesselChangeHandler);
 			GameEvents.onVesselCreate.Add(this.VesselCreateHandler);
@@ -22,19 +21,19 @@ namespace SidEx.ProjectManager {
 		}
 
 		public void OnDisable() {
-			Debug.LogFormat(@"{0} Disabling...", DEBUGNAME);
+			Log.Write($"Disabling...");
 			GameEvents.onVesselChange.Remove(this.VesselChangeHandler);
 			GameEvents.onVesselCreate.Remove(this.VesselCreateHandler);
 			GameEvents.onGameStatePostLoad.Remove(this.GameStatePostLoadHandler);
 		}
 
 		public void VesselChangeHandler(Vessel vessel) {
-//			Debug.LogFormat(@"{0} VesselChangeHandler()", DEBUGNAME);
+//			Log.Write($"VesselChangeHandler()");
 			HandleVesselNaming(vessel);
 		}
 
 		public void VesselCreateHandler(Vessel vessel) {
-//			Debug.LogFormat(@"{0} VesselCreateHandler()", DEBUGNAME);
+//			Log.Write($"VesselCreateHandler()");
 			HandleVesselNaming(vessel);
 		}
 
@@ -52,7 +51,7 @@ namespace SidEx.ProjectManager {
 			if (vessel == null)
 				return;
 
-			Debug.LogFormat(@"{0} Handling naming on {1}", DEBUGNAME, vessel.vesselName);
+			Log.Write($"Handling naming on {vessel.vesselName}");
 
 			// set up shared numbering
 			Dictionary<string, int> sharedNumberingProjects = new Dictionary<string, int>();
@@ -70,14 +69,14 @@ namespace SidEx.ProjectManager {
 
 				// apply the new name
 				vessel.vesselName = string.Format("{0} {1}", tag, countRoman);
-				Debug.LogFormat(@"{0} Renaming vessel to {1}", DEBUGNAME, vessel.vesselName);
+				Log.Write($"Renaming vessel to {vessel.vesselName}");
 
 				// all done
 				return;
 			}
 
 //			for (int i = 0; i < vessel.parts.Count(); i++)
-//				Debug.LogFormat(@"{0} \tParts list: [{1}] {2} '{3}'", DEBUGNAME, i, vessel.parts[i].partName, vessel.parts[i].vesselNaming == null ? "null" : vessel.parts[i].vesselNaming.vesselName);
+//				Log.Write($"\tParts list: [{1}] {2} '{3}'", i, vessel.parts[i].partName, vessel.parts[i].vesselNaming == null ? "null" : vessel.parts[i].vesselNaming.vesselName);
 
 			// we won't rename the vessel at the end if we don't modify it
 			bool hasBeenModified = false;
@@ -85,7 +84,7 @@ namespace SidEx.ProjectManager {
 			foreach (Part part in vessel.parts.FindAll(x => x.vesselNaming != null && x.vesselNaming.vesselName.Contains("["))) {
 				string partName = part.vesselNaming.vesselName;
 
-//				Debug.LogFormat(@"{0} Found part with vesselnaming {1} '{2}'", DEBUGNAME, part.partName, part.vesselNaming.vesselName);
+//				Log.Write($"Found part with vesselnaming {1} '{2}'", part.partName, part.vesselNaming.vesselName);
 
 				// handle unlikely events
 				if (string.IsNullOrEmpty(partName))
@@ -98,7 +97,7 @@ namespace SidEx.ProjectManager {
 				// apply the new name to this part
 				part.vesselNaming.vesselName = string.Format("{0} {1}", tag, countRoman);
 
-				Debug.LogFormat(@"{0} Renaming tagged part {1} to {2}", DEBUGNAME, part.partName, part.vesselNaming.vesselName);
+				Log.Write($"Renaming tagged part {part.partName} to {part.vesselNaming.vesselName}");
 
 				hasBeenModified = true;
 			}
@@ -106,7 +105,7 @@ namespace SidEx.ProjectManager {
 			// finally rename the whole vessel
 			if (hasBeenModified) {
 				vessel.vesselName = VesselNaming.FindPriorityNamePart(vessel).vesselNaming.vesselName;
-				Debug.LogFormat(@"{0} Renaming vessel to {1}", DEBUGNAME, vessel.vesselName);
+				Log.Write($"Renaming vessel to {vessel.vesselName}");
 			}
 		}
 

@@ -8,8 +8,6 @@ namespace SidEx.ProjectManager {
 
 	[KSPScenario(ScenarioCreationOptions.AddToAllGames, new GameScenes[] { GameScenes.FLIGHT })]
 	public class SidExProjectManagerScenario : ScenarioModule {
-		public const string DEBUGNAME = @"[SidEx Project Manager]";
-
 		// singleton
 		public static SidExProjectManagerScenario Instance { get; private set; }
 
@@ -26,7 +24,7 @@ namespace SidEx.ProjectManager {
 		}
 
 		public override void OnLoad(ConfigNode node) {
-			Debug.LogFormat(@"{0} Loading data...", DEBUGNAME);
+			Log.Write($"Loading data...");
 			base.OnLoad(node);
 
 			if (Instance != this)
@@ -39,7 +37,7 @@ namespace SidEx.ProjectManager {
 		}
 
 		public override void OnSave(ConfigNode node) {
-			Debug.LogFormat(@"{0} Saving data...", DEBUGNAME);
+			Log.Write($"Saving data...");
 			base.OnSave(node);
 
 			if (Instance != this)
