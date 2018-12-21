@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SidEx Project Manager", "SidEx Project Manager\SidEx Project Manager.csproj", "{0A5C89A5-562B-457E-B4DE-714FC2D0C4A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SidEx Science AI", "SidEx Science AI\SidEx Science AI.csproj", "{B2C23690-3D73-41D9-ACD0-29EEBF356998}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0A5C89A5-562B-457E-B4DE-714FC2D0C4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A5C89A5-562B-457E-B4DE-714FC2D0C4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A5C89A5-562B-457E-B4DE-714FC2D0C4A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C23690-3D73-41D9-ACD0-29EEBF356998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C23690-3D73-41D9-ACD0-29EEBF356998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C23690-3D73-41D9-ACD0-29EEBF356998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C23690-3D73-41D9-ACD0-29EEBF356998}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
