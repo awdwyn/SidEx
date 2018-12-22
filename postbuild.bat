@@ -14,5 +14,6 @@ xcopy /E /Y "%~2*" "%MODDIR%"
 
 rem clean up the output in release format
 del /F /Q "%MODDIR%*.pdb"
+del /F /Q "%MODDIR%*.mdb"
 mkdir "%MODDIR%Plugins"
 move /Y "%MODDIR%*.dll" "%MODDIR%Plugins\"

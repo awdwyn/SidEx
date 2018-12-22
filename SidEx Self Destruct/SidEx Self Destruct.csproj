@@ -64,6 +64,9 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ideas.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>start /D "$(SolutionDir)" /WAIT postbuild.bat "$(SolutionDir)" "$(TargetDir)" "$(TargetFileName)" "$(Configuration)" "$(ProjectName)"</PostBuildEvent>
