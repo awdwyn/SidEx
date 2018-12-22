@@ -15,12 +15,13 @@ method:
 
 create a single class with multiple settings (done via module.cfg setup)
 	bool addStagingOption = false // adds the option to enable/disable the staging icon - really only used on parts that don't already have staging enabled - will make decouplers look/act weird if used on them as they already handle staging
+	bool stagingEnabled = false // determines whether the part will explode when staged
 	bool selfDestructOnStage = false // toggles whether the self destruct is enabled by default
 
 add ui options
 	toggle on/off "Add/Remove Staging" : will only show up when addStagingOption is true, will add or remove this part from the staging stack
 	toggle on/off "Staging Self Destruct Enabled/Disabled" : toggles selfDestructOnStage
-	button "Self Destruct Now" : immediately starts the self destruct sequence
+	button+action "Self Destruct Now" : immediately starts the self destruct sequence
 
 
 sample cfg

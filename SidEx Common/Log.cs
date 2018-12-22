@@ -16,12 +16,12 @@ namespace SidEx
 			Screen
 		}
 
-		static public void Write(string s, LogFormat logFormat = LogFormat.Normal, bool always = false) {
+		static public void Write(string msg, LogFormat logFormat = LogFormat.Normal, bool always = false) {
 			string a = Assembly.GetCallingAssembly().GetName().Name;
 #if !DEBUG
 			if (always)
 #endif
-				_Write($"[{a}]", s, logFormat);
+				_Write($"[{a}]", msg, logFormat);
 		}
 
 		static private void _Write(string a, string s, LogFormat logFormat = LogFormat.Normal) {
